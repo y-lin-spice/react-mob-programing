@@ -1,9 +1,10 @@
-import { Todo } from "../types/Todo";
+import { Dispatch, SetStateAction } from "react";
+import { useAddTodos } from "../hooks/useAddTodos";
 
 type AddTodoProps = {
+  addTodos: ReturnType<typeof useAddTodos>;
+  setTodoTitle: Dispatch<SetStateAction<string>>;
   todoTitle: string;
-  setTodoTitle: React.Dispatch<React.SetStateAction<string>>;
-  setTodos?: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
 export const AddTodo: React.FC<AddTodoProps> = (props) => {
@@ -17,13 +18,9 @@ export const AddTodo: React.FC<AddTodoProps> = (props) => {
       />
       <button
         onClick={() => {
-          if (!props.setTodos) {
-            return;
-          }
-          props.setTodos((prevState) => [
-            ...prevState,
-            { title: props.todoTitle, id: Math.floor(Math.random() * 1000) }
-          ]);
+          props.addTodos({
+            title: props.todoTitle
+          });
           props.setTodoTitle("");
         }}
       >

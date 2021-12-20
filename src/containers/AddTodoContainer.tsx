@@ -1,15 +1,16 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { AddTodo } from "../components/AddTodo";
-import { TodoContext } from "../providers/TodoProvider";
+import { useAddTodos } from "../hooks/useAddTodos";
 
 export const AddTodoContainer: React.FC = () => {
-  const { setTodos } = useContext(TodoContext);
   const [todoTitle, setTodoTitle] = useState("");
+  const addTodos = useAddTodos();
+
   return (
     <AddTodo
+      addTodos={addTodos}
       todoTitle={todoTitle}
       setTodoTitle={setTodoTitle}
-      setTodos={setTodos}
     />
   );
 };

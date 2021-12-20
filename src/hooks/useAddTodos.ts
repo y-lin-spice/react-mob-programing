@@ -1,18 +1,26 @@
-import { gql, useApolloClient } from "@apollo/client";
-import { GET_TODOS } from "../lib/graphql/queries/getTodo";
-
-// const IS_LOGGED_IN = gql`
-//   query IsUserLoggedIn {
-//     isLoggedIn @client
-//   }
-// `;
+import { useApolloClient } from "@apollo/client";
+import { GetTodosResultType, GET_TODOS } from "../lib/graphql/queries/getTodo";
+import { Todo } from "../types/Todo";
 
 export const useAddTodos = () => {
   const apolloClient = useApolloClient();
-  apolloClient.cache.writeQuery({
-    query: GET_TODOS,
-    data: {
-      isLoggedIn: !!localStorage.getItem("token") // ?????
-    }
-  });
+  return (data: Pick<Todo, "title">) => {
+    const prevTodos = apolloClient.cache.readQuery<GetTodosResultType>({
+      query: GET_TODOS
+    });
+    console.log(prevTodos);
+    apolloClient.cache.writeQuery({
+      query: GET_TODOS,
+      data: {
+        todos: [
+          ...(prevTodos?.todos || []),
+          {
+            __typename: "Todo",
+            id: Math.floor(Math.random() * 1000),
+            ...data
+          }
+        ]
+      }
+    });
+  };
 };
