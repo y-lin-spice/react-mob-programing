@@ -5,18 +5,20 @@ import { Todo } from "../types/Todo";
 export const useAddTodos = () => {
   const apolloClient = useApolloClient();
   return (data: Pick<Todo, "title">) => {
-    const prevTodos = apolloClient.cache.readQuery<GetTodosResultType>({
+    const prevTodos = apolloClient.readQuery<GetTodosResultType>({
       query: GET_TODOS
     });
     console.log(prevTodos);
-    apolloClient.cache.writeQuery({
+    apolloClient.writeQuery({
       query: GET_TODOS,
       data: {
+        __typename: "Todos",
         todos: [
           ...(prevTodos?.todos || []),
           {
             __typename: "Todo",
             id: Math.floor(Math.random() * 1000),
+            isFinished: false,
             ...data
           }
         ]

@@ -1,25 +1,33 @@
-import { useContext } from "react";
-import { TodoContext } from "../providers/TodoProvider";
+import { useApolloClient } from "@apollo/client";
 import { Todo } from "../types/Todo";
+import { GetTodosResultType, GET_TODOS } from "../lib/graphql/queries/getTodo";
 
 export const useTodoHandler: () => (
   todo: Todo
 ) => React.MouseEventHandler = () => {
-  const { setTodos } = useContext(TodoContext);
+  const apolloClient = useApolloClient();
   return (todo) => (event) => {
     event.preventDefault();
-    setTodos((prevState) => {
-      return [
-        ...prevState.slice(
-          0,
-          prevState.findIndex((t) => t.id === todo.id)
-        ),
-        {
-          ...prevState.find((t) => t.id === todo.id)!,
-          isFinished: !prevState.find((t) => t.id === todo.id)?.isFinished
-        },
-        ...prevState.slice(prevState.findIndex((t) => t.id === todo.id) + 1)
-      ];
-    });
+    apolloClient.cache.updateQuery<GetTodosResultType>(
+      { query: GET_TODOS },
+      (data) => ({
+        todos: data
+          ? [
+              ...data.todos.slice(
+                0,
+                data.todos.findIndex((t) => t.id === todo.id)
+              ),
+              {
+                ...data.todos.find((t) => t.id === todo.id)!,
+                isFinished: !data.todos.find((t) => t.id === todo.id)
+                  ?.isFinished
+              },
+              ...data.todos.slice(
+                data.todos.findIndex((t) => t.id === todo.id) + 1
+              )
+            ]
+          : []
+      })
+    );
   };
 };

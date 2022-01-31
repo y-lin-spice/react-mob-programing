@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { TodoContext } from "../providers/TodoProvider";
 import { TodoComponent } from "../components/Todo";
 import { useTodoHandler } from "../hooks/useTodoHandler";
+import { useTodos } from "../hooks/useTodos";
 
 export const TodoListContainer = () => {
-  const { todos } = useContext(TodoContext);
+  const todos = useTodos();
   const todoHandler = useTodoHandler();
   return (
     <ul>
