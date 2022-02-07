@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { AddTodo } from "../components/AddTodo";
+import { AddTodoInput } from "../components";
 import { useAddTodos } from "../hooks/useAddTodos";
 
-export const AddTodoContainer: React.FC = () => {
-  const [todoTitle, setTodoTitle] = useState("");
+export const AddTodoInputContainer: React.FC = () => {
+  const [todoTitle, setTodoTitle] = useState<string>("");
   const addTodos = useAddTodos();
 
   return (
-    <AddTodo
+    <AddTodoInput
       addTodos={addTodos}
       todoTitle={todoTitle}
       setTodoTitle={setTodoTitle}

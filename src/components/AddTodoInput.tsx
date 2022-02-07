@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
 import { useAddTodos } from "../hooks/useAddTodos";
 
-type AddTodoProps = {
+type AddTodoInputProps = {
   addTodos: ReturnType<typeof useAddTodos>;
   setTodoTitle: Dispatch<SetStateAction<string>>;
   todoTitle: string;
 };
 
-export const AddTodo: React.FC<AddTodoProps> = (props) => {
+export const AddTodoInput: React.FC<AddTodoInputProps> = (props) => {
   return (
     <div>
       <input

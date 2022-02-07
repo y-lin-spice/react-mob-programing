@@ -1,4 +1,5 @@
-import { TodoComponent } from "../components/Todo";
+import React from "react";
+import { TodoListItem, TodoList } from "../components";
 import { useTodoHandler } from "../hooks/useTodoHandler";
 import { useTodos } from "../hooks/useTodos";
 
@@ -6,14 +7,12 @@ export const TodoListContainer = () => {
   const todos = useTodos();
   const todoHandler = useTodoHandler();
   return (
-    <ul>
+    <TodoList>
       {todos?.map((todo) => {
         return (
-          <li key={todo.id}>
-            <TodoComponent todo={todo} onClick={todoHandler(todo)} />
-          </li>
+          <TodoListItem key={todo.id} todo={todo} onClick={todoHandler(todo)} />
         );
       })}
-    </ul>
+    </TodoList>
   );
 };
