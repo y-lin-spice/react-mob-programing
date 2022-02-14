@@ -4,13 +4,11 @@ import { useAddTodos } from "../hooks/useAddTodos";
 
 export const AddTodoInputContainer: React.FC = () => {
   const [todoTitle, setTodoTitle] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
   const addTodos = useAddTodos();
 
+  console.log({ tags });
   return (
-    <AddTodoInput
-      addTodos={addTodos}
-      todoTitle={todoTitle}
-      setTodoTitle={setTodoTitle}
-    />
+    <AddTodoInput {...{ tags, setTags, addTodos, todoTitle, setTodoTitle }} />
   );
 };

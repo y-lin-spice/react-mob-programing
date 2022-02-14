@@ -4,7 +4,7 @@ import { Todo } from "../types/Todo";
 
 export const useAddTodos = () => {
   const apolloClient = useApolloClient();
-  return (data: Pick<Todo, "title">) => {
+  return (data: Pick<Todo, "title" | "tags">) => {
     const prevTodos = apolloClient.readQuery<GetTodosResultType>({
       query: GET_TODOS
     });

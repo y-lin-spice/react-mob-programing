@@ -5,6 +5,8 @@ type AddTodoInputProps = {
   addTodos: ReturnType<typeof useAddTodos>;
   setTodoTitle: Dispatch<SetStateAction<string>>;
   todoTitle: string;
+  tags: string[];
+  setTags: Dispatch<SetStateAction<string[]>>;
 };
 
 export const AddTodoInput: React.FC<AddTodoInputProps> = (props) => {
@@ -16,12 +18,21 @@ export const AddTodoInput: React.FC<AddTodoInputProps> = (props) => {
           props.setTodoTitle(event.target.value);
         }}
       />
+      <input
+        type="text"
+        value={props.tags?.join(",")}
+        onChange={(event) => {
+          props.setTags(event.target.value.split(/\s*,\s*/));
+        }}
+      />
       <button
         onClick={() => {
           props.addTodos({
-            title: props.todoTitle
+            title: props.todoTitle,
+            tags: props.tags
           });
           props.setTodoTitle("");
+          props.setTags([]);
         }}
       >
         追加

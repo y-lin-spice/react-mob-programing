@@ -12,6 +12,7 @@ export const GET_TODOS = gql`
       id
       title
       isFinished
+      tags
     }
   }
 `;
