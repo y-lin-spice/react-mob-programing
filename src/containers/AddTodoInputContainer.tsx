@@ -7,7 +7,7 @@ export const AddTodoInputContainer: React.FC = () => {
   const [tags, setTags] = useState<string[]>([]);
   const addTodos = useAddTodos();
 
-  console.log({ tags });
+  // console.log({ tags });
   return (
     <AddTodoInput {...{ tags, setTags, addTodos, todoTitle, setTodoTitle }} />
   );

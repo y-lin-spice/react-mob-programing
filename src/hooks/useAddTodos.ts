@@ -8,7 +8,7 @@ export const useAddTodos = () => {
     const prevTodos = apolloClient.readQuery<GetTodosResultType>({
       query: GET_TODOS
     });
-    console.log(prevTodos);
+    // console.log(prevTodos);
     apolloClient.writeQuery({
       query: GET_TODOS,
       data: {
