@@ -9,6 +9,9 @@ import { createApolloClient } from "./lib/apollo/InitialClient";
 
 const client = createApolloClient();
 
+// - apollo global state (reactive variable)
+//   - w/o type policy
+
 export default function App() {
   return (
     <ApolloProvider client={client}>
