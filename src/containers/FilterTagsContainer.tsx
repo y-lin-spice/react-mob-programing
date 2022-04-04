@@ -1,13 +1,11 @@
-import { useState } from "react";
+import { useReactiveVar } from "@apollo/client";
 import { useTags } from "../hooks/useTags";
 import { selectedTags } from "../variables/selectedTags";
-import { useReactiveVar } from "@apollo/client";
 
 export const FilterTagsContainer = () => {
   const tags = useTags();
-  //const [selectedTags, setSelectedTags] = useState<Record<string, boolean>>({});
-  const reactiveVar = useReactiveVar(selectedTags);
-
+  console.log("rerender!");
+  // useReactiveVar(selectedTags);
   return (
     <div>
       {tags.map((tag) => {
@@ -15,7 +13,7 @@ export const FilterTagsContainer = () => {
           <label key={tag}>
             <input
               type="checkbox"
-              checked={selectedTags()[tag] || false}
+              // checked={selectedTags()[tag] || false}
               onChange={(event) => {
                 selectedTags({
                   ...selectedTags(),

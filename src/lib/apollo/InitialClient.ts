@@ -6,7 +6,16 @@ export const createApolloClient = () => {
   const client = new ApolloClient({ uri: "", cache });
   client.writeQuery({
     query: GET_TODOS,
-    data: { todos: [] }
+    data: {
+      todos: Array(50)
+        .fill(0)
+        .map((_, index) => ({
+          id: index,
+          title: `Todo${index}`,
+          tags: [`tag${index}`],
+          isFinished: false
+        }))
+    }
   });
   return client;
 };
