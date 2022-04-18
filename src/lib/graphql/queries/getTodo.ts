@@ -2,17 +2,21 @@ import { gql } from "@apollo/client";
 import { Todo } from "../../../types/Todo";
 
 export type GetTodosResultType = {
-  todos: Todo[];
+  todos: {
+    data: Todo[];
+  };
 };
 
 export const GET_TODOS = gql`
-  query GetTodos {
+  query GetTodos($page: Int, $limit: Int) {
     # isLoggedIn @client
-    todos @client {
-      id
-      title
-      isFinished
-      tags
+    todos(options: { paginate: { page: $page, limit: $limit } }) {
+      data {
+        id
+        title
+        completed
+        tags @client
+      }
     }
   }
 `;

@@ -9,8 +9,8 @@ export const TodoListItem: React.FC<{
   return (
     <li className={className}>
       {todo.title}({todo.tags?.join(",")})
-      {todo.isFinished ? ": finished!!" : null}
-      <button onClick={onClick}>{todo.isFinished ? "undo" : "done"}</button>
+      {todo.completed ? ": finished!!" : null}
+      <button onClick={onClick}>{todo.completed ? "undo" : "done"}</button>
     </li>
   );
 };

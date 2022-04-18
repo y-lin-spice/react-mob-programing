@@ -19,8 +19,7 @@ export const useTodoHandler: () => (
               ),
               {
                 ...data.todos.find((t) => t.id === todo.id)!,
-                isFinished: !data.todos.find((t) => t.id === todo.id)
-                  ?.isFinished
+                completed: !data.todos.find((t) => t.id === todo.id)?.completed
               },
               ...data.todos.slice(
                 data.todos.findIndex((t) => t.id === todo.id) + 1

@@ -8,7 +8,7 @@ import { selectedTags } from "../variables/selectedTags";
 const MemoTodoListItem = React.memo(TodoListItem, (prevProps, nextProps) => {
   return (
     prevProps.todo.id === nextProps.todo.id &&
-    prevProps.todo.isFinished === nextProps.todo.isFinished
+    prevProps.todo.completed === nextProps.todo.completed
   );
 });
 

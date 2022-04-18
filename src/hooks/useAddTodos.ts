@@ -18,7 +18,7 @@ export const useAddTodos = () => {
           {
             __typename: "Todo",
             id: Math.floor(Math.random() * 1000),
-            isFinished: false,
+            completed: false,
             ...data
           }
         ]
