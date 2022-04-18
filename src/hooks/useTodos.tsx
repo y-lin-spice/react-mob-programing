@@ -9,7 +9,7 @@ export const useTodos: (opts?: { tags?: string[] }) => Todo[] | undefined = ({
   const { data } = useQuery<GetTodosResultType>(GET_TODOS, {
     variables: {
       page: 1,
-      limit: 10
+      limit: 500
     }
   });
 
